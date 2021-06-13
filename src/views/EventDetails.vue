@@ -8,33 +8,25 @@
 
 <script lang='ts'>
 import { defineComponent, ref} from 'vue'
-import EventService from "@/services/EventService.js"
+import { useEvents } from "../composables/useEvents";
 
 export default defineComponent({
-  props: ['id'],
-
-  setup(){
-    const event = ref(null)    
-  
-    const getEventDetials = () => {
-      EventService.getEvent(this.id)
-      .then(response => {
-        this.event = response.data    
-      })
-      .catch(error => {
-        console.log(error)    
-    })
-
+  props: {
+    id: {
+      type: Number,
+      required: true
     }
-/*   created() {
-    EventService.getEvent(this.id)
-    .then(response => {
-      this.event = response.data    
-    })
-    .catch(error => {
-      console.log(error)    
-    })
-  } */
-  return {event}
-}
+  },
+
+  setup(props,_){
+    const event = ref(null)
+    const { getEventById } = useEvents()
+
+    getEventById(props.id)
+      .then(e => event.value = e)
+      .catch(err => console.log(err))
+
+    return { event }
+  }
+})
 </script>

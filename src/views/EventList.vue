@@ -5,32 +5,23 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import EventCard from "@/components/EventCard.vue";
-import EventService from "@/services/EventService.js"
+import { useEvents } from "../composables/useEvents";
+import EventCard from "../components/EventCard.vue";
+
 
 export default {
   name: "EventList",
   components: {
     EventCard,
   },
+  setup() {
+    const { events, getEvents } = useEvents()
 
-  data() {
+    getEvents().catch(e => console.log(e))
+
     return {
-      events: null
+      events
     }
-  },
-  created() {
-  //axios.get(
-  //  'https://my-json-server.typicode.com/Kenyg369/real-world-vue/events'
-  //  )
-     EventService.getEvents()
-      .then(response => {
-        this.events = response.data
-      })
-      .catch(error => {
-        console.log(error)
-      })
   }
 };
 </script>
