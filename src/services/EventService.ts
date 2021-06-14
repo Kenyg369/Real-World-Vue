@@ -1,4 +1,5 @@
 import axios from "axios"
+import { EventItem } from "../type"
 
 const apiClient = axios.create({
   baseURL: 'https://my-json-server.typicode.com/Kenyg369/real-world-vue' ,
@@ -11,9 +12,9 @@ const apiClient = axios.create({
 
 export default {
   getEvents(): Promise<Event[]> {
-    return apiClient.get<Event[]>('/events')
+    return apiClient.get<EventItem[]>('/events')
   },
   getEvent(id: number): Promise<Event[]> {
-    return apiClient.get<Event>('/events/' + id)
+    return apiClient.get<EventItem>('/events/' + id)
   }
 }
