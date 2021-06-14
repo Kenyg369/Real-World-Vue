@@ -3,7 +3,9 @@ import EventList from "../views/EventList.vue";
 import About from "../views/About.vue";
 import EventDetails from "../views/EventDetails.vue";
 
-const routes = [
+const router = createRouter({
+  history: createWebHistory(),
+  routes:[
   {
     path: "/",
     name: "EventList",
@@ -20,11 +22,7 @@ const routes = [
     props: route => ({ id: Number(route.params.id)}),
     component: EventDetails,
   },
-];
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
+],
 });
 
 export default router;

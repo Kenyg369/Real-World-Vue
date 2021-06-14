@@ -15,6 +15,7 @@ export default {
     EventCard,
   },
   setup() {
+    // Only need to assign the "events" and "getEvent" out of 3 returns from useEvents
     const { events, getEvents } = useEvents()
 
     getEvents().catch(e => console.log(e))

@@ -19,7 +19,7 @@ export default defineComponent({
   },
 
   setup(props,_){
-    const event = ref(null)
+    const event = ref()
     const { getEventById } = useEvents()
 
     getEventById(props.id)

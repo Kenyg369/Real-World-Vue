@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Event } from "../composables/useEvents"
+import { Event } from "../type"
 
 const apiClient = axios.create({
   baseURL: 'https://my-json-server.typicode.com/Kenyg369/real-world-vue' ,
@@ -16,7 +16,7 @@ export async function getEvents(): Promise<Event[]> {
   return response.data;
 }
 
-export async function getEventById(id): Promise<Event> {
+export async function getEventById(id:Number): Promise<Event> {
   const response = await apiClient.get<Event>(`/events/${id}`)
 
   return response.data;

@@ -7,7 +7,7 @@
   </router-link>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "EventCard",
   props: {
@@ -15,7 +15,6 @@ export default {
       type: Object ,
       required: true
     }
-
   }
 };
 </script>

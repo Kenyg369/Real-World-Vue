@@ -1,18 +1,9 @@
 import { ref } from "vue";
 import { getEvents as getEventsApi, getEventById as getEventByIdApi } from "../services/EventService"
-
-export interface Event {
-    category: string;
-    date: string;
-    description: string;
-    id: number;
-    location: string;
-    organizer: string;
-    time: string;
-    title: string;
-}
+import { Event } from "../type"
 
 const events = ref<Event[]>([]);
+
 export function useEvents() {
     const getEvents = async (): Promise<void> => {
       events.value = await getEventsApi();
