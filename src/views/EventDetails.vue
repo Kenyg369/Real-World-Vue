@@ -7,8 +7,9 @@
 </template>>
 
 <script lang='ts'>
-import { defineComponent, ref} from 'vue'
-import EventService from "../services/EventService.js"
+import { defineComponent, ref} from 'vue';
+import EventService from "../services/EventService";
+import { EventItem } from "../type";
 
 export default defineComponent({
   props: {
@@ -19,11 +20,11 @@ export default defineComponent({
   },
 
   setup(props,_){
-    const event = ref(null)    
+    const event = ref<EventItem>()    
   
     EventService.getEvent(props.id)
     .then(response => {
-      event.value = response.data    
+      event.value = response.data 
     })
     .catch(error => {
       console.log(error)    

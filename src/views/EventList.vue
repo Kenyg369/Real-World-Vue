@@ -4,35 +4,33 @@
   </div>
 </template>
 
-<script>
+<script lang='ts'>
 // @ is an alias to /src
+import { EventItem } from '../type';
+import {ref, defineComponent} from 'vue';
 import EventCard from "../components/EventCard.vue";
-import EventService from "../services/EventService.js"
+import EventService from "../services/EventService";
 
-export default {
+export default defineComponent({
   name: "EventList",
   components: {
     EventCard,
   },
-
-  data() {
-    return {
-      events: null
-    }
-  },
-  created() {
-  //axios.get(
-  //  'https://my-json-server.typicode.com/Kenyg369/real-world-vue/events'
-  //  )
-     EventService.getEvents()
-      .then(response => {
-        this.events = response.data
-      })
-      .catch(error => {
-        console.log(error)
-      })
+  setup() {
+    const events = ref<EventItem[]>([]) 
+    //axios.get(
+    //  'https://my-json-server.typicode.com/Kenyg369/real-world-vue/events'
+    //  )
+    EventService.getEvents()
+    .then(response => {
+      events.value = response.data
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    return{events}
   }
-};
+});
 </script>
 
 <style scoped>
