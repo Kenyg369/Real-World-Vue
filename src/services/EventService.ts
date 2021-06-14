@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Event } from "../type"
-
+//Create a Axios Instance
 const apiClient = axios.create({
   baseURL: 'https://my-json-server.typicode.com/Kenyg369/real-world-vue' ,
   withCredentials: false,
@@ -9,7 +9,8 @@ const apiClient = axios.create({
     'Content-Type': 'application/json'
   }
 })
-
+//Send API call and wrap it in the promise funcitons in composable "useEvents""
+//Keep API call function in this filem. Deeper code seperation is good for larger size project
 export async function getEvents(): Promise<Event[]> {
   const response = await apiClient.get<Event[]>('/events')
 

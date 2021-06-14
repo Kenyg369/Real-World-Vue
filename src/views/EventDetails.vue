@@ -7,8 +7,10 @@
 </template>>
 
 <script lang='ts'>
-import { defineComponent, ref} from 'vue'
+import { defineComponent, ref} from 'vue';
 import { useEvents } from "../composables/useEvents";
+import { Event } from "../type";
+
 
 export default defineComponent({
   props: {
@@ -19,7 +21,9 @@ export default defineComponent({
   },
 
   setup(props,_){
-    const event = ref()
+    const event = ref<Event>()
+    // Only need to assign the "getEventById" out of 3 returns from useEvents
+
     const { getEventById } = useEvents()
 
     getEventById(props.id)
