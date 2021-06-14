@@ -8,24 +8,27 @@
 
 <script lang='ts'>
 import { defineComponent, ref} from 'vue'
-import EventService from "@/services/EventService.js"
+import EventService from "../services/EventService.js"
 
 export default defineComponent({
-  props: ['id'],
+  props: {
+    id:{
+      type: Number,
+      required: true,
+    } 
+  },
 
-  setup(){
+  setup(props,_){
     const event = ref(null)    
   
-    const getEventDetials = () => {
-      EventService.getEvent(this.id)
-      .then(response => {
-        this.event = response.data    
-      })
-      .catch(error => {
-        console.log(error)    
+    EventService.getEvent(props.id)
+    .then(response => {
+      event.value = response.data    
+    })
+    .catch(error => {
+      console.log(error)    
     })
 
-    }
 /*   created() {
     EventService.getEvent(this.id)
     .then(response => {
@@ -35,6 +38,7 @@ export default defineComponent({
       console.log(error)    
     })
   } */
-  return {event}
-}
+    return {event}
+  }
+})  
 </script>
